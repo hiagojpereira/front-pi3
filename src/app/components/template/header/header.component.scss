@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(45deg, rgb(230, 230, 230), gray);
+}
+
+.header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #222;
+}
+
+.header .espaco-logo {
+    width: 200px;
+    margin-left: -16px;
+}
+
+.header .logo {    
+    max-height: 60px;
+    margin: auto;
+}
+
+.header .title-group {
+    padding-left: 0px;
+}
+
+.header .title-group i {
+    padding-right: 5px;
+}

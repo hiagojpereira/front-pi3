@@ -1,0 +1,38 @@
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.green {
+  color: #28a745;
+}
+
+.red {
+  color: rgb(227, 94, 107);
+}
+
+.bkg-green {
+  background-color: #28a745;
+}
+
+.bkg-red {
+  background-color: #e35e6b;
+}
+
+.bkg-grey {
+  background-color: #EEE;
+}
+
+
+
+body {
+  background-color: #f4f9fc;
+  font-family: Roboto, sans-serif;
+  margin: 0;
+}
+
+.mat-raised-button {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+

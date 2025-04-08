@@ -1,12 +1,32 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { LoginComponent } from './views/login/login.component';
+import { AuthService } from './views/login/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [LoginComponent, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'front-pi3';
+export class AppComponent implements OnInit {
+  ngOnInit(): void {
+    this.authService.user$.subscribe(user => {
+      if (user) {
+        this.authService.currentUserSig.set({
+          email: user.email!,
+          username: user.displayName!,
+          password: ''
+        });
+      } else {
+        this.authService.currentUserSig.set(null);
+      }
+      console.log(this.authService.currentUserSig());
+    });
+  }
+  authService = inject(AuthService);
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

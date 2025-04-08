@@ -1,0 +1,44 @@
+<div class="container">
+    <!-- <mat-card class="map mat-elevation-z3" style="flex: 1"> -->
+        <mat-card-title class="title">Localidade dos casos confirmados</mat-card-title>
+    <!-- </mat-card> -->
+    <div class="top-section">
+        <mat-card class="map mat-elevation-z3" style="flex: 1">
+            <div class="card-field-value">
+                <mat-card-title class="field">Arquivo:</mat-card-title>
+                <mat-card-title class="value">{{planilha.nome}}</mat-card-title>
+            </div>
+        </mat-card>
+        <mat-card class="map mat-elevation-z3" style="flex: 1">
+            <div class="card-field-value">
+                <mat-card-title class="field">Tamanho (Bytes):</mat-card-title>
+                <mat-card-title class="value">{{planilha.tamanho}}</mat-card-title>
+            </div>
+        </mat-card>
+        <mat-card class="map mat-elevation-z3" style="flex: 1">
+            <div class="card-field-value">
+                <mat-card-title class="field">Data upload:</mat-card-title>
+                <mat-card-title class="value">{{formatarDataString(planilha.data)}}</mat-card-title>
+            </div>
+        </mat-card>
+        <mat-card class="map mat-elevation-z3" style="flex: 1">
+            <div class="card-field-value">
+                <mat-card-title class="field">Nº casos:</mat-card-title>
+                <mat-card-title class="value">{{planilha.dados.length}}</mat-card-title>
+            </div>
+        </mat-card>
+        <mat-card-content>
+            <button mat-stroked-button color="warn" (click)="voltar()"> Voltar </button>
+        </mat-card-content>
+    </div>
+    
+    <div class="map-container">
+        <mat-card>
+            <mat-card-content>
+                <google-map [center]="center" [zoom]="13.5" height="95vh" width="100%">
+                    <map-marker *ngFor="let position of markerLatLong" [position]="position"></map-marker>
+                </google-map>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
