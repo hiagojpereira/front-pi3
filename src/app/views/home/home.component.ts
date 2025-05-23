@@ -1,10 +1,6 @@
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
-import { HeaderService } from '../../components/template/header/header.service';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from '../login/auth.service';
-import { HeaderComponent } from '../../components/template/header/header.component';
-import { NavComponent } from '../../components/template/nav/nav.component';
-import { FooterComponent } from '../../components/template/footer/footer.component';
 
 import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
@@ -116,11 +112,13 @@ export class HomeComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = (e: any) => {
+        
         const data = new Uint8Array(e.target.result);
         const workbook = XLSX.read(data, { type: 'array' });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(sheet);
+        const jsonData = XLSX.utils.sheet_to_json(sheet, { raw: false });
+
         const fileData = {
           nome: file.name,
           tamanho: file.size,
@@ -130,7 +128,6 @@ export class HomeComponent implements OnInit {
 
         this.fileName = file.name
         this.srcResult = fileData
-        console.log(fileData);
         this.create()
       };
   

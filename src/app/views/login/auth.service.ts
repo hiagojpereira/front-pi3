@@ -50,7 +50,7 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
-        return !!localStorage.getItem('userToken'); // Verifica se há um token salvo
+        return !!localStorage.getItem('userToken');
     }
 
     showMessage(msg: string, isError: boolean = false): void {

@@ -10,9 +10,7 @@ import { UserInterface } from './user.interface';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 
-/**
- * @title Input with error messages
- */
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,7 +34,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private fb: FormBuilder) {
       this.form = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],  // Campo email com validação required e email
+        email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required],
       });
     }

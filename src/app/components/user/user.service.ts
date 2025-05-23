@@ -14,8 +14,6 @@ import { User } from './user.model';
 })
 export class UserService {
 
-  //urlBase = 'http://192.168.0.11:5000/users';
-
   urlBase = 'https://api-python-tcc.herokuapp.com/users';
 
   constructor(
@@ -46,9 +44,7 @@ export class UserService {
   }
 
   update(user: User): Observable<User> {
-    console.log(user)
     const url = `${this.urlBase}/${user.cod_usuario}`
-    console.log(url)
     return this.http.put<User>(url, user).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
@@ -57,7 +53,6 @@ export class UserService {
 
   delete(cod_usuario: number): Observable<User> {
     const url = `${this.urlBase}/${cod_usuario}`
-    console.log(url)
     return this.http.delete<User>(url).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
@@ -74,7 +69,6 @@ export class UserService {
   }
 
   errorHandler(e: any): Observable<any> {
-    console.log(e.error.erro)
     this.showMessage(e.error.erro, true)
     return EMPTY
   }

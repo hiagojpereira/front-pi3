@@ -1,44 +1,72 @@
 <div class="container">
-    <!-- <mat-card class="map mat-elevation-z3" style="flex: 1"> -->
-        <mat-card-title class="title">Localidade dos casos confirmados</mat-card-title>
-    <!-- </mat-card> -->
-    <div class="top-section">
-        <mat-card class="map mat-elevation-z3" style="flex: 1">
-            <div class="card-field-value">
-                <mat-card-title class="field">Arquivo:</mat-card-title>
-                <mat-card-title class="value">{{planilha.nome}}</mat-card-title>
-            </div>
-        </mat-card>
-        <mat-card class="map mat-elevation-z3" style="flex: 1">
-            <div class="card-field-value">
-                <mat-card-title class="field">Tamanho (Bytes):</mat-card-title>
-                <mat-card-title class="value">{{planilha.tamanho}}</mat-card-title>
-            </div>
-        </mat-card>
-        <mat-card class="map mat-elevation-z3" style="flex: 1">
-            <div class="card-field-value">
-                <mat-card-title class="field">Data upload:</mat-card-title>
-                <mat-card-title class="value">{{formatarDataString(planilha.data)}}</mat-card-title>
-            </div>
-        </mat-card>
-        <mat-card class="map mat-elevation-z3" style="flex: 1">
-            <div class="card-field-value">
-                <mat-card-title class="field">Nº casos:</mat-card-title>
-                <mat-card-title class="value">{{planilha.dados.length}}</mat-card-title>
-            </div>
-        </mat-card>
+  <h1 class="title">Localidade dos casos</h1>
+
+  <div class="top-section">
+    <mat-card class="info-card" *ngFor="let item of infoCards">
+      <div class="card-field-value">
+        <mat-card-title class="field">{{ item.label }}</mat-card-title>
+        <mat-card-title class="value">{{ item.value }}</mat-card-title>
+      </div>
+    </mat-card>
+    <div class="button-wrapper">
+      <button mat-stroked-button color="warn" (click)="voltar()">Voltar</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <mat-card class="filter-card">
+        <mat-card-title>Sexo:</mat-card-title>
+        <mat-radio-group [(ngModel)]="selectedSexo" (change)="filtrar()">
+          <mat-radio-button *ngFor="let opt of lista_sexo" [value]="opt">{{ opt }}</mat-radio-button>
+        </mat-radio-group>
+      </mat-card>
+
+      <mat-card class="filter-card">
+        <mat-card-title>Idade:</mat-card-title>
+        <div class="idade-range">
+          <mat-form-field appearance="fill">
+            <mat-label>Idade mínima</mat-label>
+            <input matInput
+                   type="text"
+                   maxlength="3"
+                   pattern="[0-9]*"
+                   inputmode="numeric"
+                   [(ngModel)]="idadeMinima"
+                   (keypress)="onlyNumber($event)"
+                   (keyup)="filtrar()">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Idade máxima</mat-label>
+            <input matInput
+                   type="text"
+                   maxlength="3"
+                   pattern="[0-9]*"
+                   inputmode="numeric"
+                   [(ngModel)]="idadeMaxima"
+                   (keypress)="onlyNumber($event)"
+                   (keyup)="filtrar()">
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <mat-card class="filter-card">
+        <mat-card-title>Bairros:</mat-card-title>
+        <mat-checkbox *ngFor="let opt of lista_bairros" [checked]="isSelected(opt)" (change)="toggleSelection(opt)">
+          {{ opt }}
+        </mat-checkbox>
+      </mat-card>
+    </div>
+
+    <div class="col-9">
+      <mat-card class="map-card">
+        <mat-card-title class="value">Quantidade filtrada: {{ getLen(dados_filtrados) }}</mat-card-title>
         <mat-card-content>
-            <button mat-stroked-button color="warn" (click)="voltar()"> Voltar </button>
+          <google-map [center]="center" [zoom]="13.5" height="85vh" width="100%">
+            <map-marker *ngFor="let position of markerLatLong" [position]="position"></map-marker>
+          </google-map>
         </mat-card-content>
+      </mat-card>
     </div>
-    
-    <div class="map-container">
-        <mat-card>
-            <mat-card-content>
-                <google-map [center]="center" [zoom]="13.5" height="95vh" width="100%">
-                    <map-marker *ngFor="let position of markerLatLong" [position]="position"></map-marker>
-                </google-map>
-            </mat-card-content>
-        </mat-card>
-    </div>
+  </div>
 </div>
