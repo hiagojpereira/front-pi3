@@ -87,11 +87,6 @@ mat-form-field {
   margin-bottom: 0.75rem;
 }
 
-.idade-range {
-  display: flex;
-  gap: 0.75rem;
-}
-
 .idade-range mat-form-field {
   flex: 1;
   margin-bottom: 0;
